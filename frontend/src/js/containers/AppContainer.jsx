@@ -8,6 +8,7 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import {ToastContainer} from 'react-toastify'
 /* global jQuery */
 
 var AppContainer = React.createClass({
@@ -30,6 +31,7 @@ var AppContainer = React.createClass({
                     <LeftSideBar resizeSpreadsheet={this.resizeSpreadsheet} />
                     <SpreadsheetContainer />
                     <RightSideBar />
+                    <ToastContainer />
                 </div>
             </div>
         );

@@ -160,7 +160,6 @@ class FileTab extends Component {
     }
 
     handleFileSelected(file) {
-        this.handleFileExplorerTryClose();
         var path = cleanPath(file.path + '/' + file.name);
         var self = this
         return new Promise((resolve, reject) => {
@@ -178,6 +177,10 @@ class FileTab extends Component {
                             selectedVariableName: Object.keys(variablesAxes[0])[0],
                             selectedVariable: null
                         });
+                        return true
+                    }).catch(function(error){
+                        console.log("error!: ", error)
+                        return false
                     })
                 )
             }

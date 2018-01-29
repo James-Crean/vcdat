@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { Modal, ButtonToolbar, Button, Row, Col, Glyphicon } from 'react-bootstrap';
 import style from './FileExplorer.scss';
+import {toast} from 'react-toastify'
 /* global $ */
 
 function cleanPath(path) {
@@ -149,7 +150,21 @@ class FileExplorer extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.tryClose}>Cancel</Button>
-                    <Button bsStyle="primary" onClick={(e) => { this.props.onFileSelected(this.state.selectedFile) }} disabled={!this.state.selectedFile}>Select</Button>
+                    <Button 
+                        bsStyle="primary"
+                        onClick={(e) => {
+                            this.props.onFileSelected(this.state.selectedFile).then((success) => {
+                                if(success){
+                                    console.log("success")
+                                    this.props.onTryClose()
+                                }
+                                else{
+                                    console.log("failure")
+                                    toast.error("Error opening file", {position: toast.POSITION.BOTTOM_CENTER})
+                                }
+                            })
+                        }} 
+                        disabled={!this.state.selectedFile}>Select</Button>
                 </Modal.Footer>
             </Modal>
         )
